@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { Providers } from './Providers';
+
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -14,7 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <div className="px-6 py-7">
+          <Providers>{children}</Providers>
+        </div>
+      </body>
     </html>
   );
 }
