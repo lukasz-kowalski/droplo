@@ -4,11 +4,13 @@ import classNames from 'classnames';
 interface Props {
   type?: 'Primary' | 'Secondary';
   textColor?: 'Primary' | 'Secondary' | 'Tertiary';
+  onClick: () => void;
 }
 
 export const Button = ({
   type = 'Primary',
   textColor = 'Primary',
+  onClick,
   children,
 }: PropsWithChildren<Props>): JSX.Element => {
   const buttonClassNames = classNames({
@@ -27,5 +29,9 @@ export const Button = ({
     'shadow-btnShadowColor': true,
   });
 
-  return <button className={buttonClassNames}>{children}</button>;
+  return (
+    <button className={buttonClassNames} onClick={onClick}>
+      {children}
+    </button>
+  );
 };

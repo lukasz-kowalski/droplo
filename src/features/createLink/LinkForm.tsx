@@ -1,17 +1,33 @@
+import { useContext } from 'react';
 import { useFormik } from 'formik';
+
+import { MenuContext } from '@/features/menu/context/MenuContext';
 
 interface Props {
   onCancel: () => void;
+  onSubmit: () => void;
 }
 
-export const LinkForm = ({ onCancel }: Props): JSX.Element => {
+export interface LinkFromForm {
+  name: string;
+  url?: string;
+}
+
+export const LinkForm = ({ onCancel, onSubmit }: Props): JSX.Element => {
+  const state = useContext(MenuContext);
+
   const formik = useFormik({
     initialValues: {
       name: '',
       url: '',
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      state?.addNewLink({
+        name: values.name,
+        url: values.url,
+      });
+
+      onSubmit();
     },
   });
 
@@ -22,7 +38,9 @@ export const LinkForm = ({ onCancel }: Props): JSX.Element => {
       <label htmlFor="url">Link</label>
       <input id="url" name="url" onChange={formik.handleChange} value={formik.values.url} />
 
-      <button onClick={onCancel}>Anuluj</button>
+      <button type="button" onClick={onCancel}>
+        Anuluj
+      </button>
       <button type="submit">Dodaj</button>
     </form>
   );

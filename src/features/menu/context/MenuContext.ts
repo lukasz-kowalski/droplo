@@ -2,6 +2,6 @@
 
 import { createContext } from 'react';
 
-import { MenuState } from './state';
+import { UseMenuStateOutput } from './state';
 
-export const MenuContext = createContext<MenuState | null>(null);
+export const MenuContext = createContext<UseMenuStateOutput | null>(null);

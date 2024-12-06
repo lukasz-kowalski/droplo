@@ -1,18 +1,30 @@
 'use client';
 
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import { MenuContext } from '@/features/menu/context/MenuContext';
 
 import { EmptyMenu } from './EmptyMenu';
 
 export const MenuContainer = (): JSX.Element => {
-  const [links, setLinks] = useState([]);
   const state = useContext(MenuContext);
 
-  if (!links || links.length === 0) {
+  if (!state?.menuItems || state.menuItems.length === 0) {
     return <EmptyMenu />;
   }
 
-  return <></>;
+  console.log(state.menuItems);
+
+  const addLink = () => {
+    state.moveItem('444', '222');
+  };
+
+  return (
+    <>
+      <button onClick={addLink}>Add link</button>
+      {state.menuItems.map((item) => {
+        return <p key={item.id}>{item.name}</p>;
+      })}
+    </>
+  );
 };
